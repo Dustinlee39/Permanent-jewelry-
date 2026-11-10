@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternal Link — Permanent Jewelry</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --gold: #d4af37;
+    --gold-light: #f0d78c;
+    --gold-dark: #b8942e;
+    --rose: #c9a38a;
+    --bg: #0c0a09;
+    --bg-card: #161311;
+    --text: #f5f0e6;
+    --text-muted: #a89f91;
+    --accent: #e8d5a3;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ========== NAV ========== */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(12, 10, 9, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    transition: all 0.4s ease;
+  }
+
+  nav.scrolled {
+    padding: 0.8rem 5%;
+    background: rgba(12, 10, 9, 0.95);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .logo span {
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--gold);
+  }
+
+  .nav-links a:hover::after {
+    width: 100%;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 5% 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 30% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(201, 163, 138, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 0.4rem 1.2rem;
+    border-radius: 50px;
+    margin-bottom: 1.8rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--rose) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 540px;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+    color: #0c0a09;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.04em;
+    padding: 1rem 2.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
+  }
+
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    box-shadow: none;
+    margin-left: 1rem;
+  }
+
+  .btn-outline:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: none;
+  }
+
+  /* ========== FLOATING CHARMS (decorative) ========== */
+  .floating-charm {
+    position: absolute;
+    opacity: 0.15;
+    font-size: 3rem;
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(8deg); }
+  }
+
+  /* ========== SECTIONS ========== */
+  section {
+    padding: 6rem 5%;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-header p {
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* ========== HOW IT WORKS ========== */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .step {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .step:hover {
+    transform: translateY(-8px);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .step:hover::before {
+    opacity: 1;
+  }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--gold);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+
+  .step p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+
+  /* ========== CHARM BUILDER ========== */
+  .builder {
+    background: linear-gradient(180deg, var(--bg) 0%, #110e0c 100%);
+  }
+
+  .builder-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .builder-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .preview-box {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: sticky;
+    top: 100px;
+  }
+
+  .wrist-preview {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 30%, #2a2420, #1a1512);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+  }
+
+  .chain-ring {
+    width: 180px;
+    height: 180px;
+    border: 3px solid var(--gold);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+
+  .charm-on-preview {
+    position: absolute;
+    font-size: 1.8rem;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .selected-charms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    min-height: 50px;
+    margin-bottom: 1.5rem;
+  }
+
+  .selected-tag {
+    background: rgba(212, 175, 55, 0.15);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    color: var(--gold-light);
+    padding: 0.35rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .selected-tag button {
+    background: none;
+    border: none;
+    color: var(--gold);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .charm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 1rem;
+  }
+
+  .charm-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 14px;
+    padding: 1.2rem 0.8rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .charm-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .charm-card.active {
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+  }
+
+  .charm-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .charm-name {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .price-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    margin: 1.5rem 0 1rem;
+  }
+
+  /* ========== GALLERY ========== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gallery-item {
+    aspect-ratio: 1;
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    cursor: pointer;
+  }
+
+  .gallery-item .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #1c1814, #12100e);
+    color: var(--gold);
+    font-size: 3.5rem;
+  }
+
+  .gallery-item .label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.85));
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* ========== TESTIMONIAL ========== */
+  .testimonial {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 3rem;
+    background: var(--bg-card);
+    border-radius: 20px;
+    border: 1px solid rgba(212, 175, 55, 0.12);
+  }
+
+  .testimonial blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+  }
+
+  .testimonial cite {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-style: normal;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    padding: 4rem 5% 2rem;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    text-align: center;
+  }
+
+  footer .logo {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+  }
+
+  footer p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--gold);
+  }
+
+  /* ========== ANIMATIONS ========== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">ETERNAL<span>LINK</span></a>
+  <ul class="nav-links">
+    <li><a href="#how">Process</a></li>
+    <li><a href="#builder">Build Yours</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="floating-charm" style="top:15%;left:10%;animation-delay:0s;">🗡️</div>
+  <div class="floating-charm" style="top:25%;right:12%;animation-delay:1.5s;">🪶</div>
+  <div class="floating-charm" style="bottom:20%;left:15%;animation-delay:3s;">🍀</div>
+  <div class="floating-charm" style="bottom:30%;right:10%;animation-delay:2s;">✨</div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Welded Forever • Never Removed</div>
+    <h1>Jewelry That<br>Stays With You</h1>
+    <p>Custom permanent bracelets, anklets & necklaces — welded closed so they become part of your story. No clasps. No taking off. Just meaning that lasts.</p>
+    <div>
+      <a href="#builder" class="btn">Design Your Piece</a>
+      <a href="#how" class="btn btn-outline">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-header fade-up">
+    <h2>The Permanent Process</h2>
+    <p>Simple, intimate, and permanent. One visit. Lifetime piece.</p>
+  </div>
+  <div class="steps">
+    <div class="step fade-up">
+      <div class="step-num">01</div>
+      <h3>Choose Your Chain</h3>
+      <p>Select solid gold, gold-filled, or sterling. Delicate or bold. We guide the perfect fit and length.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">02</div>
+      <h3>Add Your Charms</h3>
+      <p>Initials, daggers, feathers, clovers, birthstones — meaningful symbols welded directly into the chain.</p>
+    </div>
+    <div class="step fade-up">
+      <div class="step-num">03</div>
+      <h3>We Weld It On</h3>
+      <p>In minutes we permanently close the bracelet around your wrist. No clasp. No removal. Ever.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHARM BUILDER -->
+<section class="builder" id="builder">
+  <div class="section-header fade-up">
+    <h2>Build Your Permanent Bracelet</h2>
+    <p>Select charms. See the live preview. Get an instant price.</p>
+  </div>
+
+  <div class="builder-grid">
+    <!-- PREVIEW -->
+    <div class="preview-box fade-up">
+      <div class="wrist-preview">
+        <div class="chain-ring" id="chainRing">
+          <!-- Charms will be injected here by JS -->
+        </div>
+      </div>
+
+      <div class="selected-charms" id="selectedCharms">
+        <span style="color:var(--text-muted);font-size:0.9rem;">No charms selected yet</span>
+      </div>
+
+      <div class="price-display" id="priceDisplay">$98</div>
+      <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:1.5rem;">Base chain + selected charms</p>
+      <button class="btn" onclick="bookAppointment()" style="width:100%;justify-content:center;">Book Appointment</button>
+    </div>
+
+    <!-- CHARM SELECTOR -->
+    <div class="fade-up">
+      <h3 style="margin-bottom:1.2rem;font-weight:500;">Select Charms</h3>
+      <div class="charm-grid" id="charmGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-header fade-up">
+    <h2>Real Pieces</h2>
+    <p>Every bracelet tells a different story.</p>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-up">
+      <div class="placeholder">🗡️</div>
+      <div class="label">Dagger + Initial</div>
+    </div>
+    <div class="gallery-item fade-up">
+      <div class="placeholder">🪶</div>
+      <div class="label">Feather Charm Set</div>
+    </div>
+    <div class="gallery-item fade-up">
+      <div class="placeholder">🍀</div>
+      <div class="label">Four-Leaf Clover</div>
+    </div>
+    <div class="gallery-item fade-up">
+      <div class="placeholder">J</div>
+      <div class="label">Custom Initial</div>
+    </div>
+    <div class="gallery-item fade-up">
+      <div class="placeholder">✨</div>
+      <div class="label">Minimal Chain Only</div>
+    </div>
+    <div class="gallery-item fade-up">
+      <div class="placeholder">⚔️</div>
+      <div class="label">Stacked Charms</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section>
+  <div class="testimonial fade-up">
+    <blockquote>“They knew me my whole life… this bracelet carries every chapter.”</blockquote>
+    <cite>— Client, custom dagger + initial piece</cite>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book" style="text-align:center;padding-bottom:8rem;">
+  <div class="section-header fade-up">
+    <h2>Ready to Make It Permanent?</h2>
+    <p>Appointments available most days. Walk-ins welcome when the welder is free.</p>
+  </div>
+  <a href="#" class="btn" onclick="bookAppointment()">Reserve Your Spot</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">ETERNAL<span>LINK</span></a>
+  <p>Permanent jewelry • Welded with meaning</p>
+  <div class="footer-links">
+    <a href="#how">Process</a>
+    <a href="#builder">Builder</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#">Contact</a>
+  </div>
+  <p style="font-size:0.8rem;margin-top:2rem;opacity:0.6;">© 2026 Eternal Link. All pieces handmade & welded on-site.</p>
+</footer>
+
+<script>
+  // ========== CHARM DATA ==========
+  const charms = [
+    { id: 'dagger', name: 'Dagger', icon: '🗡️', price: 28 },
+    { id: 'j', name: 'Letter J', icon: 'J', price: 22 },
+    { id: 'feather', name: 'Feather', icon: '🪶', price: 26 },
+    { id: 'clover', name: 'Clover', icon: '🍀', price: 24 },
+    { id: 'heart', name: 'Heart', icon: '♡', price: 20 },
+    { id: 'star', name: 'Star', icon: '✦', price: 20 },
+    { id: 'moon', name: 'Moon', icon: '☾', price: 22 },
+    { id: 'cross', name: 'Cross', icon: '✝', price: 24 },
+    { id: 'infinity', name: 'Infinity', icon: '∞', price: 22 },
+    { id: 'key', name: 'Key', icon: '🗝', price: 26 },
+  ];
+
+  const BASE_PRICE = 98;
+  let selected = [];
+
+  // ========== RENDER CHARM GRID ==========
+  function renderCharmGrid() {
+    const grid = document.getElementById('charmGrid');
+    grid.innerHTML = charms.map(c => `
+      <div class="charm-card ${selected.includes(c.id) ? 'active' : ''}" 
+           onclick="toggleCharm('${c.id}')">
+        <span class="charm-icon">${c.icon}</span>
+        <div class="charm-name">${c.name}</div>
+        <div style="font-size:0.8rem;color:var(--gold);margin-top:0.3rem;">+\[ {c.price}</div>
+      </div>
+    `).join('');
+  }
+
+  // ========== TOGGLE CHARM ==========
+  function toggleCharm(id) {
+    if (selected.includes(id)) {
+      selected = selected.filter(x => x !== id);
+    } else {
+      if (selected.length >= 5) {
+        alert('Maximum 5 charms recommended for comfort & balance.');
+        return;
+      }
+      selected.push(id);
+    }
+    updatePreview();
+    renderCharmGrid();
+  }
+
+  // ========== UPDATE PREVIEW ==========
+  function updatePreview() {
+    // Selected tags
+    const tagsEl = document.getElementById('selectedCharms');
+    if (selected.length === 0) {
+      tagsEl.innerHTML = '<span style="color:var(--text-muted);font-size:0.9rem;">No charms selected yet</span>';
+    } else {
+      tagsEl.innerHTML = selected.map(id => {
+        const c = charms.find(x => x.id === id);
+        return `<span class="selected-tag">${c.icon} \( {c.name} <button onclick="event.stopPropagation();toggleCharm(' \){id}')">×</button></span>`;
+      }).join('');
+    }
+
+    // Price
+    const extra = selected.reduce((sum, id) => {
+      return sum + (charms.find(c => c.id === id)?.price || 0);
+    }, 0);
+    document.getElementById('priceDisplay').textContent = ` \]{BASE_PRICE + extra}`;
+
+    // Visual charms on the ring
+    const ring = document.getElementById('chainRing');
+    ring.innerHTML = '';
+    selected.forEach((id, i) => {
+      const c = charms.find(x => x.id === id);
+      const angle = (i / selected.length) * 360;
+      const rad = (angle - 90) * (Math.PI / 180);
+      const r = 85;
+      const x = Math.cos(rad) * r;
+      const y = Math.sin(rad) * r;
+
+      const el = document.createElement('div');
+      el.className = 'charm-on-preview';
+      el.textContent = c.icon;
+      el.style.left = `calc(50% + ${x}px)`;
+      el.style.top = `calc(50% + ${y}px)`;
+      el.style.transform = 'translate(-50%, -50%)';
+      ring.appendChild(el);
+    });
+  }
+
+  // ========== BOOK ==========
+  function bookAppointment() {
+    con
